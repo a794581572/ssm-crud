@@ -1,0 +1,1020 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.crud.dao.tt.TestUserMapper">
+  <resultMap id="BaseResultMap" type="com.example.crud.bean.tt.TestUser">
+    <id column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="t_sex" jdbcType="TINYINT" property="tSex" />
+    <result column="t_username" jdbcType="VARCHAR" property="tUsername" />
+    <result column="t_password" jdbcType="VARCHAR" property="tPassword" />
+    <result column="t_email" jdbcType="VARCHAR" property="tEmail" />
+    <result column="t_QQ" jdbcType="INTEGER" property="tQq" />
+    <result column="t_update_time" jdbcType="TIMESTAMP" property="tUpdateTime" />
+    <result column="t_create_time" jdbcType="TIMESTAMP" property="tCreateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    t_id, t_sex, t_username, t_password, t_email, t_QQ, t_update_time, t_create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.example.crud.bean.tt.TestUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_test_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_test_user
+    where t_id = #{tId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_test_user
+    where t_id = #{tId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.crud.bean.tt.TestUserExample">
+    delete from t_test_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.crud.bean.tt.TestUser">
+    insert into t_test_user (t_id, t_sex, t_username, 
+      t_password, t_email, t_QQ, 
+      t_update_time, t_create_time)
+    values (#{tId,jdbcType=INTEGER}, #{tSex,jdbcType=TINYINT}, #{tUsername,jdbcType=VARCHAR}, 
+      #{tPassword,jdbcType=VARCHAR}, #{tEmail,jdbcType=VARCHAR}, #{tQq,jdbcType=INTEGER}, 
+      #{tUpdateTime,jdbcType=TIMESTAMP}, #{tCreateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.crud.bean.tt.TestUser">
+    insert into t_test_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="tSex != null">
+        t_sex,
+      </if>
+      <if test="tUsername != null">
+        t_username,
+      </if>
+      <if test="tPassword != null">
+        t_password,
+      </if>
+      <if test="tEmail != null">
+        t_email,
+      </if>
+      <if test="tQq != null">
+        t_QQ,
+      </if>
+      <if test="tUpdateTime != null">
+        t_update_time,
+      </if>
+      <if test="tCreateTime != null">
+        t_create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="tSex != null">
+        #{tSex,jdbcType=TINYINT},
+      </if>
+      <if test="tUsername != null">
+        #{tUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="tPassword != null">
+        #{tPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tEmail != null">
+        #{tEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="tQq != null">
+        #{tQq,jdbcType=INTEGER},
+      </if>
+      <if test="tUpdateTime != null">
+        #{tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tCreateTime != null">
+        #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.crud.bean.tt.TestUserExample" resultType="java.lang.Long">
+    select count(*) from t_test_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_test_user
+    <set>
+      <if test="record.tId != null">
+        t_id = #{record.tId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSex != null">
+        t_sex = #{record.tSex,jdbcType=TINYINT},
+      </if>
+      <if test="record.tUsername != null">
+        t_username = #{record.tUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tPassword != null">
+        t_password = #{record.tPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tEmail != null">
+        t_email = #{record.tEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tQq != null">
+        t_QQ = #{record.tQq,jdbcType=INTEGER},
+      </if>
+      <if test="record.tUpdateTime != null">
+        t_update_time = #{record.tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tCreateTime != null">
+        t_create_time = #{record.tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_test_user
+    set t_id = #{record.tId,jdbcType=INTEGER},
+      t_sex = #{record.tSex,jdbcType=TINYINT},
+      t_username = #{record.tUsername,jdbcType=VARCHAR},
+      t_password = #{record.tPassword,jdbcType=VARCHAR},
+      t_email = #{record.tEmail,jdbcType=VARCHAR},
+      t_QQ = #{record.tQq,jdbcType=INTEGER},
+      t_update_time = #{record.tUpdateTime,jdbcType=TIMESTAMP},
+      t_create_time = #{record.tCreateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.crud.bean.tt.TestUser">
+    update t_test_user
+    <set>
+      <if test="tSex != null">
+        t_sex = #{tSex,jdbcType=TINYINT},
+      </if>
+      <if test="tUsername != null">
+        t_username = #{tUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="tPassword != null">
+        t_password = #{tPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tEmail != null">
+        t_email = #{tEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="tQq != null">
+        t_QQ = #{tQq,jdbcType=INTEGER},
+      </if>
+      <if test="tUpdateTime != null">
+        t_update_time = #{tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tCreateTime != null">
+        t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.crud.bean.tt.TestUser">
+    update t_test_user
+    set t_sex = #{tSex,jdbcType=TINYINT},
+      t_username = #{tUsername,jdbcType=VARCHAR},
+      t_password = #{tPassword,jdbcType=VARCHAR},
+      t_email = #{tEmail,jdbcType=VARCHAR},
+      t_QQ = #{tQq,jdbcType=INTEGER},
+      t_update_time = #{tUpdateTime,jdbcType=TIMESTAMP},
+      t_create_time = #{tCreateTime,jdbcType=TIMESTAMP}
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.example.crud.bean.tt.TestUser">
+    <id column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="t_sex" jdbcType="TINYINT" property="tSex" />
+    <result column="t_username" jdbcType="VARCHAR" property="tUsername" />
+    <result column="t_password" jdbcType="VARCHAR" property="tPassword" />
+    <result column="t_email" jdbcType="VARCHAR" property="tEmail" />
+    <result column="t_QQ" jdbcType="INTEGER" property="tQq" />
+    <result column="t_update_time" jdbcType="TIMESTAMP" property="tUpdateTime" />
+    <result column="t_create_time" jdbcType="TIMESTAMP" property="tCreateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    t_id, t_sex, t_username, t_password, t_email, t_QQ, t_update_time, t_create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.example.crud.bean.tt.TestUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_test_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_test_user
+    where t_id = #{tId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_test_user
+    where t_id = #{tId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.crud.bean.tt.TestUserExample">
+    delete from t_test_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.crud.bean.tt.TestUser">
+    insert into t_test_user (t_id, t_sex, t_username, 
+      t_password, t_email, t_QQ, 
+      t_update_time, t_create_time)
+    values (#{tId,jdbcType=INTEGER}, #{tSex,jdbcType=TINYINT}, #{tUsername,jdbcType=VARCHAR}, 
+      #{tPassword,jdbcType=VARCHAR}, #{tEmail,jdbcType=VARCHAR}, #{tQq,jdbcType=INTEGER}, 
+      #{tUpdateTime,jdbcType=TIMESTAMP}, #{tCreateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.crud.bean.tt.TestUser">
+    insert into t_test_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="tSex != null">
+        t_sex,
+      </if>
+      <if test="tUsername != null">
+        t_username,
+      </if>
+      <if test="tPassword != null">
+        t_password,
+      </if>
+      <if test="tEmail != null">
+        t_email,
+      </if>
+      <if test="tQq != null">
+        t_QQ,
+      </if>
+      <if test="tUpdateTime != null">
+        t_update_time,
+      </if>
+      <if test="tCreateTime != null">
+        t_create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="tSex != null">
+        #{tSex,jdbcType=TINYINT},
+      </if>
+      <if test="tUsername != null">
+        #{tUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="tPassword != null">
+        #{tPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tEmail != null">
+        #{tEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="tQq != null">
+        #{tQq,jdbcType=INTEGER},
+      </if>
+      <if test="tUpdateTime != null">
+        #{tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tCreateTime != null">
+        #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.crud.bean.tt.TestUserExample" resultType="java.lang.Long">
+    select count(*) from t_test_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_test_user
+    <set>
+      <if test="record.tId != null">
+        t_id = #{record.tId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSex != null">
+        t_sex = #{record.tSex,jdbcType=TINYINT},
+      </if>
+      <if test="record.tUsername != null">
+        t_username = #{record.tUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tPassword != null">
+        t_password = #{record.tPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tEmail != null">
+        t_email = #{record.tEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tQq != null">
+        t_QQ = #{record.tQq,jdbcType=INTEGER},
+      </if>
+      <if test="record.tUpdateTime != null">
+        t_update_time = #{record.tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tCreateTime != null">
+        t_create_time = #{record.tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_test_user
+    set t_id = #{record.tId,jdbcType=INTEGER},
+      t_sex = #{record.tSex,jdbcType=TINYINT},
+      t_username = #{record.tUsername,jdbcType=VARCHAR},
+      t_password = #{record.tPassword,jdbcType=VARCHAR},
+      t_email = #{record.tEmail,jdbcType=VARCHAR},
+      t_QQ = #{record.tQq,jdbcType=INTEGER},
+      t_update_time = #{record.tUpdateTime,jdbcType=TIMESTAMP},
+      t_create_time = #{record.tCreateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.crud.bean.tt.TestUser">
+    update t_test_user
+    <set>
+      <if test="tSex != null">
+        t_sex = #{tSex,jdbcType=TINYINT},
+      </if>
+      <if test="tUsername != null">
+        t_username = #{tUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="tPassword != null">
+        t_password = #{tPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tEmail != null">
+        t_email = #{tEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="tQq != null">
+        t_QQ = #{tQq,jdbcType=INTEGER},
+      </if>
+      <if test="tUpdateTime != null">
+        t_update_time = #{tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tCreateTime != null">
+        t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.crud.bean.tt.TestUser">
+    update t_test_user
+    set t_sex = #{tSex,jdbcType=TINYINT},
+      t_username = #{tUsername,jdbcType=VARCHAR},
+      t_password = #{tPassword,jdbcType=VARCHAR},
+      t_email = #{tEmail,jdbcType=VARCHAR},
+      t_QQ = #{tQq,jdbcType=INTEGER},
+      t_update_time = #{tUpdateTime,jdbcType=TIMESTAMP},
+      t_create_time = #{tCreateTime,jdbcType=TIMESTAMP}
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.example.crud.bean.tt.TestUser">
+    <id column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="t_sex" jdbcType="TINYINT" property="tSex" />
+    <result column="t_username" jdbcType="VARCHAR" property="tUsername" />
+    <result column="t_password" jdbcType="VARCHAR" property="tPassword" />
+    <result column="t_email" jdbcType="VARCHAR" property="tEmail" />
+    <result column="t_QQ" jdbcType="INTEGER" property="tQq" />
+    <result column="t_update_time" jdbcType="TIMESTAMP" property="tUpdateTime" />
+    <result column="t_create_time" jdbcType="TIMESTAMP" property="tCreateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    t_id, t_sex, t_username, t_password, t_email, t_QQ, t_update_time, t_create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.example.crud.bean.tt.TestUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_test_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_test_user
+    where t_id = #{tId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_test_user
+    where t_id = #{tId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.crud.bean.tt.TestUserExample">
+    delete from t_test_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.crud.bean.tt.TestUser">
+    insert into t_test_user (t_id, t_sex, t_username, 
+      t_password, t_email, t_QQ, 
+      t_update_time, t_create_time)
+    values (#{tId,jdbcType=INTEGER}, #{tSex,jdbcType=TINYINT}, #{tUsername,jdbcType=VARCHAR}, 
+      #{tPassword,jdbcType=VARCHAR}, #{tEmail,jdbcType=VARCHAR}, #{tQq,jdbcType=INTEGER}, 
+      #{tUpdateTime,jdbcType=TIMESTAMP}, #{tCreateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.crud.bean.tt.TestUser">
+    insert into t_test_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="tSex != null">
+        t_sex,
+      </if>
+      <if test="tUsername != null">
+        t_username,
+      </if>
+      <if test="tPassword != null">
+        t_password,
+      </if>
+      <if test="tEmail != null">
+        t_email,
+      </if>
+      <if test="tQq != null">
+        t_QQ,
+      </if>
+      <if test="tUpdateTime != null">
+        t_update_time,
+      </if>
+      <if test="tCreateTime != null">
+        t_create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="tSex != null">
+        #{tSex,jdbcType=TINYINT},
+      </if>
+      <if test="tUsername != null">
+        #{tUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="tPassword != null">
+        #{tPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tEmail != null">
+        #{tEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="tQq != null">
+        #{tQq,jdbcType=INTEGER},
+      </if>
+      <if test="tUpdateTime != null">
+        #{tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tCreateTime != null">
+        #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.crud.bean.tt.TestUserExample" resultType="java.lang.Long">
+    select count(*) from t_test_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_test_user
+    <set>
+      <if test="record.tId != null">
+        t_id = #{record.tId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSex != null">
+        t_sex = #{record.tSex,jdbcType=TINYINT},
+      </if>
+      <if test="record.tUsername != null">
+        t_username = #{record.tUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tPassword != null">
+        t_password = #{record.tPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tEmail != null">
+        t_email = #{record.tEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tQq != null">
+        t_QQ = #{record.tQq,jdbcType=INTEGER},
+      </if>
+      <if test="record.tUpdateTime != null">
+        t_update_time = #{record.tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tCreateTime != null">
+        t_create_time = #{record.tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_test_user
+    set t_id = #{record.tId,jdbcType=INTEGER},
+      t_sex = #{record.tSex,jdbcType=TINYINT},
+      t_username = #{record.tUsername,jdbcType=VARCHAR},
+      t_password = #{record.tPassword,jdbcType=VARCHAR},
+      t_email = #{record.tEmail,jdbcType=VARCHAR},
+      t_QQ = #{record.tQq,jdbcType=INTEGER},
+      t_update_time = #{record.tUpdateTime,jdbcType=TIMESTAMP},
+      t_create_time = #{record.tCreateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.crud.bean.tt.TestUser">
+    update t_test_user
+    <set>
+      <if test="tSex != null">
+        t_sex = #{tSex,jdbcType=TINYINT},
+      </if>
+      <if test="tUsername != null">
+        t_username = #{tUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="tPassword != null">
+        t_password = #{tPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tEmail != null">
+        t_email = #{tEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="tQq != null">
+        t_QQ = #{tQq,jdbcType=INTEGER},
+      </if>
+      <if test="tUpdateTime != null">
+        t_update_time = #{tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tCreateTime != null">
+        t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.crud.bean.tt.TestUser">
+    update t_test_user
+    set t_sex = #{tSex,jdbcType=TINYINT},
+      t_username = #{tUsername,jdbcType=VARCHAR},
+      t_password = #{tPassword,jdbcType=VARCHAR},
+      t_email = #{tEmail,jdbcType=VARCHAR},
+      t_QQ = #{tQq,jdbcType=INTEGER},
+      t_update_time = #{tUpdateTime,jdbcType=TIMESTAMP},
+      t_create_time = #{tCreateTime,jdbcType=TIMESTAMP}
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.example.crud.bean.tt.TestUser">
+    <id column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="t_sex" jdbcType="TINYINT" property="tSex" />
+    <result column="t_username" jdbcType="VARCHAR" property="tUsername" />
+    <result column="t_password" jdbcType="VARCHAR" property="tPassword" />
+    <result column="t_email" jdbcType="VARCHAR" property="tEmail" />
+    <result column="t_QQ" jdbcType="INTEGER" property="tQq" />
+    <result column="t_update_time" jdbcType="TIMESTAMP" property="tUpdateTime" />
+    <result column="t_create_time" jdbcType="TIMESTAMP" property="tCreateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    t_id, t_sex, t_username, t_password, t_email, t_QQ, t_update_time, t_create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.example.crud.bean.tt.TestUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_test_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_test_user
+    where t_id = #{tId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_test_user
+    where t_id = #{tId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.crud.bean.tt.TestUserExample">
+    delete from t_test_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.crud.bean.tt.TestUser">
+    insert into t_test_user (t_id, t_sex, t_username, 
+      t_password, t_email, t_QQ, 
+      t_update_time, t_create_time)
+    values (#{tId,jdbcType=INTEGER}, #{tSex,jdbcType=TINYINT}, #{tUsername,jdbcType=VARCHAR}, 
+      #{tPassword,jdbcType=VARCHAR}, #{tEmail,jdbcType=VARCHAR}, #{tQq,jdbcType=INTEGER}, 
+      #{tUpdateTime,jdbcType=TIMESTAMP}, #{tCreateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.crud.bean.tt.TestUser">
+    insert into t_test_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="tSex != null">
+        t_sex,
+      </if>
+      <if test="tUsername != null">
+        t_username,
+      </if>
+      <if test="tPassword != null">
+        t_password,
+      </if>
+      <if test="tEmail != null">
+        t_email,
+      </if>
+      <if test="tQq != null">
+        t_QQ,
+      </if>
+      <if test="tUpdateTime != null">
+        t_update_time,
+      </if>
+      <if test="tCreateTime != null">
+        t_create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="tSex != null">
+        #{tSex,jdbcType=TINYINT},
+      </if>
+      <if test="tUsername != null">
+        #{tUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="tPassword != null">
+        #{tPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tEmail != null">
+        #{tEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="tQq != null">
+        #{tQq,jdbcType=INTEGER},
+      </if>
+      <if test="tUpdateTime != null">
+        #{tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tCreateTime != null">
+        #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.crud.bean.tt.TestUserExample" resultType="java.lang.Long">
+    select count(*) from t_test_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_test_user
+    <set>
+      <if test="record.tId != null">
+        t_id = #{record.tId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSex != null">
+        t_sex = #{record.tSex,jdbcType=TINYINT},
+      </if>
+      <if test="record.tUsername != null">
+        t_username = #{record.tUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tPassword != null">
+        t_password = #{record.tPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tEmail != null">
+        t_email = #{record.tEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tQq != null">
+        t_QQ = #{record.tQq,jdbcType=INTEGER},
+      </if>
+      <if test="record.tUpdateTime != null">
+        t_update_time = #{record.tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tCreateTime != null">
+        t_create_time = #{record.tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_test_user
+    set t_id = #{record.tId,jdbcType=INTEGER},
+      t_sex = #{record.tSex,jdbcType=TINYINT},
+      t_username = #{record.tUsername,jdbcType=VARCHAR},
+      t_password = #{record.tPassword,jdbcType=VARCHAR},
+      t_email = #{record.tEmail,jdbcType=VARCHAR},
+      t_QQ = #{record.tQq,jdbcType=INTEGER},
+      t_update_time = #{record.tUpdateTime,jdbcType=TIMESTAMP},
+      t_create_time = #{record.tCreateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.crud.bean.tt.TestUser">
+    update t_test_user
+    <set>
+      <if test="tSex != null">
+        t_sex = #{tSex,jdbcType=TINYINT},
+      </if>
+      <if test="tUsername != null">
+        t_username = #{tUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="tPassword != null">
+        t_password = #{tPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tEmail != null">
+        t_email = #{tEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="tQq != null">
+        t_QQ = #{tQq,jdbcType=INTEGER},
+      </if>
+      <if test="tUpdateTime != null">
+        t_update_time = #{tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tCreateTime != null">
+        t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.crud.bean.tt.TestUser">
+    update t_test_user
+    set t_sex = #{tSex,jdbcType=TINYINT},
+      t_username = #{tUsername,jdbcType=VARCHAR},
+      t_password = #{tPassword,jdbcType=VARCHAR},
+      t_email = #{tEmail,jdbcType=VARCHAR},
+      t_QQ = #{tQq,jdbcType=INTEGER},
+      t_update_time = #{tUpdateTime,jdbcType=TIMESTAMP},
+      t_create_time = #{tCreateTime,jdbcType=TIMESTAMP}
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+</mapper>

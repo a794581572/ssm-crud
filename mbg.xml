@@ -20,26 +20,28 @@
 		</javaTypeResolver>
 
 		<!-- 指定javaBean生成的位置 -->
-		<javaModelGenerator targetPackage="com.example.crud.bean"
+		<javaModelGenerator targetPackage="com.example.crud.bean.tt"
 			targetProject=".\src\main\java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<!--指定sql映射文件生成的位置 -->
-		<sqlMapGenerator targetPackage="mapper" targetProject=".\src\main\resources">
+		<sqlMapGenerator targetPackage="mapper/tt" targetProject=".\src\main\resources">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<!-- 指定dao接口生成的位置，mapper接口 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.example.crud.dao" targetProject=".\src\main\java">
+			targetPackage="com.example.crud.dao.tt" targetProject=".\src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
 
 		<!-- table指定每个表的生成策略 -->
-		<table tableName="tbl_emp" domainObjectName="Employee"></table>
-		<table tableName="tbl_dept" domainObjectName="Department"></table>
+		<!-- <table tableName="tbl_emp" domainObjectName="Employee"></table>
+		<table tableName="tbl_dept" domainObjectName="Department"></table> -->
+		<!-- 新增测试类 -->
+		<table tableName="t_test_user" domainObjectName="TestUser"></table>
 	</context>
 </generatorConfiguration>
